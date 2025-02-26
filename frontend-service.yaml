@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend-service
+  labels:
+    name: frontend-service
+    app: api-monitoring-app
+spec:
+  type: NodePort
+  ports:
+  - port: 80
+    targetPort: 80
+    nodePort: 30005
+  selector:
+    name: frontend-pod
+    app: api-monitoring-app

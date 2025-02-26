@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: gateway-backend-service
+  labels:
+    name: gateway-backend-service
+    app: api-monitoring-app
+spec:
+  ports:
+  - port: 4000
+    targetPort: 4000
+  selector:
+    name: gateway-backend-pod
+    app: api-monitoring-app
