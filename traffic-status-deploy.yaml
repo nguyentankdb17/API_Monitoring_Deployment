@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: traffic-status-deploy
+  labels:
+    app: api-monitoring-app
+    name: traffic-status-deploy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: traffic-status-pod
+      app: api-monitoring-app
+  template:
+    metadata:
+      name: traffic-status-pod
+      labels:
+        name: traffic-status-pod
+        app: api-monitoring-app
+    spec:
+      containers:
+        - name: traffic-status
+          image: nguyentankdb17/api-monitoring-app:traffic-status
+          imagePullPolicy: Always
+          ports:
+          - containerPort: 4004

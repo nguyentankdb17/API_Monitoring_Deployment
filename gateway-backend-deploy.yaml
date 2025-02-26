@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gateway-backend-deploy
+  labels:
+    app: api-monitoring-app
+    name: gateway-backend-deploy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: api-monitoring-app
+      name: gateway-backend-pod
+  template:
+    metadata:
+      name: gateway-backend-pod
+      labels:
+        name: gateway-backend-pod
+        app: api-monitoring-app
+    spec:
+      containers:
+        - name: gateway-backend
+          image: nguyentankdb17/api-monitoring-app:gateway-backend
+          imagePullPolicy: Always
+          ports:
+           - containerPort: 4000

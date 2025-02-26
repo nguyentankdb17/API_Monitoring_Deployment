@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: endpoint-status-deploy
+  labels:
+    app: api-monitoring-app
+    name: endpoint-status-deploy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: endpoint-status-pod
+      app: api-monitoring-app
+  template:
+    metadata:
+      name: endpoint-status-pod
+      labels:
+        name: endpoint-status-pod
+        app: api-monitoring-app
+    spec:
+      containers:
+        - name: endpoint-status
+          image: nguyentankdb17/api-monitoring-app:endpoint-status
+          imagePullPolicy: Always
+          ports:
+          - containerPort: 4002

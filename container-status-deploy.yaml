@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: container-status-deploy
+  labels:
+    app: api-monitoring-app
+    name: container-status-deploy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: container-status-pod
+      app: api-monitoring-app
+  template:
+    metadata:
+      name: container-status-pod
+      labels:
+        name: container-status-pod
+        app: api-monitoring-app
+    spec:
+      containers:
+        - name: container-status
+          image: nguyentankdb17/api-monitoring-app:container-status
+          ports:
+          - containerPort: 4001
+
